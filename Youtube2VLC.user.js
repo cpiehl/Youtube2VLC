@@ -24,11 +24,12 @@ String.format = function() {
   return s;
 }
 
+var vlc_password = "noneofyourbusiness"
 var win_kodi_url = 'http://192.168.1.100:8085/jsonrpc'
 var win_kodi_json = '{"jsonrpc":"2.0","id":1,"method":"Player.Open","params":"{"item":{"file":"plugin%3A%2F%2Fplugin.video.youtube%2F%3Faction%3Dplay_video%26videoid%3D=%s"}}}';
 var lunix_vlc_url = "http://192.168.1.101:8080/requests/status.xml?command=in_enqueue&input=%s";
 var win_vlc_url = "http://192.168.1.100:8080/requests/status.xml?command=in_enqueue&input=%s";
-var autoremote_key = "noneofyourbusiness"
+var autoremote_key = "alsononeofyourbusiness"
 var autoremote_url = "https://autoremotejoaomgcd.appspot.com/sendmessage?key=" + autoremote_key + "&message=%s";
 
 var f = [
@@ -55,11 +56,9 @@ function addButtons(e) {
 			var sData = dest[3].replace("%s", videoID)
 			$(d).addClass('yt2vlc')
 				.html('<img src="' + GM_getResourceURL(dest[0]) + '" height=20 width=20 title="' + dest[1] + '">')
-				//~ .prependTo($(jThis.parent()))
 				.insertBefore($(jThis))
 				.click(function(event){
 					sendPOST(sURL, sData);
-					//~ alert(sData)
 					event.stopPropagation();
 				})
 				.css("display", "inline")
@@ -82,7 +81,7 @@ function sendPOST(sURL, sData) {
 			"Content-Type": "application/json",
 			"User-Agent": "Mozilla/5.0",    // If not specified, navigator.userAgent will be used.
 			"Accept": "text/xml",           // If not specified, browser defaults will be used.
-			"Authorization": "Basic " + btoa(":cheese12")
+			"Authorization": "Basic " + btoa(":" + vlc_password)
 		},
 		data: sData
 	});
